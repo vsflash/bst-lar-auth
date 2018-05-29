@@ -49,7 +49,12 @@ public function store(Request $request)
 }
     
     public function destroy(Task $task) {
+        $this->authorize('destroy', $task);
         $task->delete();
         return redirect(route('tasks.index'));
+    }
+    
+    public function edit(Request $request) {
+        return view('tasks.edit');
     }
 }
