@@ -22,12 +22,27 @@ class TaskController extends Controller
     }
     
     public function create() {
-        return 'create';
+        return view('tasks.create');
     }
     
-    public function store() {
-        return 'store';
-    }
+    /**
+ * Создание новой задачи.
+ *
+ * @param  Request  $request
+ * @return Response
+ */
+public function store(Request $request)
+{
+  $this->validate($request, [
+    'name' => 'required|max:255',
+  ]);
+
+  $request->user()->tasks()->create([
+    'name' => $request->name,
+  ]);
+
+  return redirect('/tasks.index');
+}
     
     public function destroy() {
         return 'destroy';
