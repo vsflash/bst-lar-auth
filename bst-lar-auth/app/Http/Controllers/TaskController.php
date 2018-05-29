@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use App\Task;
 
 class TaskController extends Controller
 {
@@ -47,7 +48,8 @@ public function store(Request $request)
   return redirect(route('/tasks.index'));
 }
     
-    public function destroy() {
-        return 'destroy';
+    public function destroy(Task $task) {
+        $task->delete();
+        return redirect(route('tasks.index'));
     }
 }
