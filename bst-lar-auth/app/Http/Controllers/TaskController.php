@@ -17,8 +17,11 @@ class TaskController extends Controller
         $this->middleware('auth');
     }
     
-    public function index() {
-        return view('tasks.index');
+    public function index(Request $request) {
+        $tasks=$request->user()->tasks()->get();
+        return view('tasks.index',[
+                'tasks' => $tasks,
+                ]);
     }
     
     public function create() {
@@ -41,7 +44,7 @@ public function store(Request $request)
     'name' => $request->name,
   ]);
 
-  return redirect('/tasks.index');
+  return redirect(route('/tasks.index'));
 }
     
     public function destroy() {
