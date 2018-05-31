@@ -9,15 +9,16 @@
                 <div class="panel-body">
                     @include('common.errors')
                     <!-- Форма новой задачи -->
-                    <form action="{{ url(route('tasks.store')) }}" method="POST" class="form-horizontal">
+                    <form action="{{ url(route('tasks.update')) }}" method="POST" class="form-horizontal">
                         {{ csrf_field() }}
 
                         <!-- Имя задачи -->
                         <div class="form-group">
                             <label for="task" class="col-sm-3 control-label">Задача</label>
+                            <input type="hidden" name="_method" value="PUT">
 
                             <div class="col-sm-6">
-                                <input type="text" name="name" id="task-name" class="form-control">
+                                <input type="text" name="name" id="task-name" class="form-control" value="{{ $task->name }}">
                             </div>
                         </div>
 
